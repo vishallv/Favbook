@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+    .book-info,.users{
+        display: inline-block;
+        vertical-align: top;
+    }
+    .users{
+    
+    margin-left: 30%;
+    }
+    
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Welcome</a>
+        <form class="form-inline">
+
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+    </nav>
+    <div class="container">
+
+        <div class="book-info">
+
+            <h2>{{book.title}}</h2>
+            <p>Added by: {{book.uploaded_by.first_name}}</p>
+            <p>Added on : {{book.created_at}}</p>
+            <p>Last updated on : {{book.updated_at}}</p>
+
+            <p>Description : {{book.description}}</p>
+            
+        </div>
+        <div class="users">
+            <h2>User who likethis book:</h2>
+            <ul>
+                {% for user in users  %}
+                <li>{{user.first_name}}  {{user.last_name}}</li>
+
+                {% endfor%}
+                <!-- <li>Tom bombadil</li>
+                <li>Bilblo bombadil</li> -->
+            </ul>
+            {% if check %}
+            <a href="/addtofav/{{book.id}}">Add to favorite</a>
+            {% else %}
+            <a href="">Unlike the book</a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

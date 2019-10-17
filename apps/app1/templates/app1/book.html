@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .container {
+            margin: 5%;
+
+        }
+
+        .book-add,
+        .book-all {
+            display: inline-block;
+            vertical-align: top;
+            /* width: 50%; */
+        }
+
+        .book-all {
+
+            margin-left: 30%
+        }
+        .each-book{
+            margin: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Welcome, {{user.first_name}}</a>
+        <form class="form-inline">
+
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+    </nav>
+    <div class="container">
+
+        <div class="book-add">
+            <h2>Add a Favorite Book</h2>
+            <form action="/addbook" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Description</label>
+                    <!-- <input type="text" class="form-control" name=""> -->
+                    <textarea class="form-control" name="description" cols="30" rows="5"></textarea>
+                </div>
+
+                <button class="btn btn-success" type="submit">Add</button>
+
+            </form>
+
+        </div>
+        <div class="book-all">
+            <h2>All Books</h2>
+            {% for book in allBook%}
+            <div class="each-book">
+                <a href="/booksverify/{{book.id}}">{{book.title}}</a>
+                <p>(Added by {{book.uploaded_by.first_name}})</p>
+                <a href="">Add to favorite</a>
+            </div>
+
+            {% endfor %}
+
+            <!-- <div class="each-book">
+                <a href="">Book1</a>
+                <p>(Added by frodo)</p>
+                <p>this is a favourite</p>
+            </div>
+            <div class="each-book">
+                <a href="">Lord of rings</a>
+                <p>(Added by frodo)</p>
+                <p>this is a favourite</p>
+            </div>
+            <div class="each-book">
+                <a href="">Book1</a>
+                <p>(Added by frodo)</p>
+                <a href="">Add to favorite</a>
+            </div> -->
+
+        </div>
+    </div>
+
+</body>
+
+</html>

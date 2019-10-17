@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .container {
+            margin: 5%;
+        }
+
+        .registration,
+        .login {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 20%;
+
+        }
+
+        .login {
+            margin-left: 30%;
+        }
+
+        /* input {
+                    margin-left: 20px;
+                } */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="registration">
+
+            <h2>Registration</h2>
+
+            <form action="/registeruser" method="POST">
+
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label>First Name</label>
+                    <input class="form-control" type="text" name="first_name">
+                </div>
+                <div class="form-group row">
+                    <label>Last Name </label>
+                    <input class="form-control" type="text" name="last_name">
+                </div>
+                <div class="form-group row">
+                    <label>Email</label>
+                    <input class="form-control" type="text" name="email">
+                </div>
+                <div class="form-group row">
+                    <label>Password:</label>
+                    <input class="form-control" type="password" name="pass">
+                </div>
+                <div class="form-group row">
+                    <label>Confirm Password</label>
+                    <input class="form-control" type="password" name="cpass">
+                </div>
+                <Button class="btn btn-primary btn-lg" type="submit">Register</Button>
+
+            </form>
+
+
+        </div>
+        <div class="login">
+            <h2>Login</h2>
+            <form action="/loginuser" method="POST">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label>Email</label>
+                    <input class="form-control" type="text" name="email">
+                </div>
+                <div class="form-group row">
+                    <label>Password:</label>
+                    <input class="form-control" type="password" name="pass">
+                </div>
+                <Button class="btn btn-primary btn-lg" type="submit">Login</Button>
+
+            </form>
+
+        </div>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .book-edit,
+        .users {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .users {
+
+            margin-left: 30%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Welcome</a>
+        <form class="form-inline">
+
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+    </nav>
+    <div class="container">
+        <div class="book-edit">
+            <form action="/makeedit/{{book.id}}" method="POST">
+                {% csrf_token %}
+
+                <div class="form-group row">
+                    <label>Title</label>
+                    <input class="form-control" type="text" name="title" value="{{book.title}}">
+                </div>
+                <p>Added by: {{book.uploaded_by.first_name}}</p>
+                <p>Added on : {{book.created_at}}</p>
+                <p>Last updated on : {{book.updated_at}}</p>
+                <div class="form-group row">
+                    <label>Description</label>
+                    <input class="form-control" type="text" name="description" value="{{book.description}}">
+                </div>
+                <button type="submit" class="btn btn-success"> Update</button>
+
+            </form>
+            <button type="submit" class="btn btn-danger"> Delete</button>
+        </div>
+        <div class="users">
+            <h2>User who likethis book:</h2>
+            <ul>
+                {% for user in users  %}
+                <li>{{user.first_name}} {{user.last_name}}</li>
+
+                {% endfor%}
+                <!-- <li>Tom bombadil</li>
+                <li>Bilblo bombadil</li> -->
+            </ul>
+
+            <!-- <a href="">Add to favorite</a> -->
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>
